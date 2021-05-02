@@ -25,7 +25,7 @@ const app = new Vue(
                 "img/foto4.jpg",
                 "img/foto5.jpg"
             ],
-            activeImage: 0,
+            activeImage: 2,
            
         },
         mounted: function () {
@@ -34,7 +34,7 @@ const app = new Vue(
 
         methods: {
             startSlider: function () {
-                this.timer = setInterval(this.next, 4000)
+               this.timer = setInterval(this.next, 3000)
 
             },
 
@@ -43,12 +43,15 @@ const app = new Vue(
             },
             next: function () {
                 this.activeImage += 1;
+                if(this.activeImage > this.characters.length -1 ) this.activeImage = 0
             },
             prev: function () {
                 this.activeImage -= 1;
+                if(this.activeImage < this.characters.length -1 ) this.activeImage = 0 
             },
 
             jump(index) {
+               
                 this.activeImage = index
             }
 
