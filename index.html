@@ -17,18 +17,29 @@
 <body>
 
     <div id="app" class="wrapper-flex">
-        <div class="">
-            <i class="fa fa-chevron-circle-left"></i>
+
+        <div class="left-arrow-container">
+            <i class="fa fa-chevron-circle-left" @click="prev()"></i>
         </div>
-        <div v-for>
-            <img :src="impostaImg" alt="">
-            <div class="">
+        
+        <div class="center-block">
+            <div v-for="i in [activeImage]">
+
+                <img class="main-img" :src="currentImg()" alt="">
 
             </div>
+            
+            <!-- dots -->
+            <ul class="dots-container">
+                <li v-for="(dot, index) in slides" :class="{ active: ++index === activeImage }" class="dot" @click="jump(index)"></li>
+            </ul>
+
         </div>
-        <div>
-            <i class="fa fa-chevron-circle-right"></i>
+
+        <div class="right-arrow-container">
+            <i class="fa fa-chevron-circle-right next" @click="next()"></i>
         </div>
+
     </div>
 
     <script src="myScript.js"></script>
