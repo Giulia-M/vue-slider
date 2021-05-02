@@ -26,7 +26,7 @@ const app = new Vue(
                 "img/foto5.jpg"
             ],
             activeImage: 0,
-            slides: 5,
+           
         },
         mounted: function () {
             this.startSlider()

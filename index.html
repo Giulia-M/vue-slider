@@ -31,7 +31,7 @@
             
             <!-- dots -->
             <ul class="dots-container">
-                <li v-for="(dot, index) in slides" :class="{ active: ++index === activeImage }" class="dot" @click="jump(index)"></li>
+                <li v-for="(dot, index) in characters" :class="{ active: ++index === activeImage }" class="dot" @click="jump(index)"></li>
             </ul>
 
         </div>
