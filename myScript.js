@@ -25,36 +25,57 @@ const app = new Vue(
                 "img/foto4.jpg",
                 "img/foto5.jpg"
             ],
-            activeImage: 2,
-           
+            activeImage: 0,
         },
-        mounted: function () {
-            this.startSlider()
-        },
+
 
         methods: {
-            startSlider: function () {
-               this.timer = setInterval(this.next, 3000)
 
+        /**
+         * @param {number} direction - +1 se vogliamo andare avanti, -1 se indietro.
+        */
+            changeImg(direction, changedByAI) {
+                let newIndex = this.activeImage + direction;
+
+                if (newIndex < 0) {
+                    /*
+                    Se indice < di 0, facciamo andare l'utente all'ultima immagine della lista
+                    */
+                    newIndex = this.characters.length - 1;
+
+                } else if (newIndex > (this.characters.length - 1)) {
+                    /*
+                    Se l'indice è già l'ultimo della lista delle immagini, facciamo andare l'utente alla prima immagine
+                    */
+                    newIndex = 0;
+                }
+
+                this.activeImage = newIndex;
             },
 
-            currentImg: function () {
-                return this.characters[Math.abs(this.activeImage) % this.characters.length];
-            },
-            next: function () {
-                this.activeImage += 1;
-                if(this.activeImage > this.characters.length -1 ) this.activeImage = 0
-            },
-            prev: function () {
-                this.activeImage -= 1;
-                if(this.activeImage < this.characters.length -1 ) this.activeImage = 0 
+            onDotClick(clickedIndex) {
+                this.activeImage = clickedIndex;
             },
 
-            jump(index) {
-               
-                this.activeImage = index
+            play() {
+                clearInterval(this.timer);
+
+                this.timer = setInterval(() => {
+                    this.changeImg(+1, true);
+                }, 5000);
+            },
+
+            pause() {
+                clearInterval(this.timer);
             }
 
+        },
+        mounted() {
+            const elementoHtml = document.querySelector(".wrapper-flex");
+    
+            elementoHtml.focus();
+    
+            this.play();
         }
     }
 )

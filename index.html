@@ -16,28 +16,35 @@
 
 <body>
 
-    <div id="app" class="wrapper-flex">
+    <div id="app" >
+        <div class="wrapper-flex"  tabindex="-1" @keyup.left="changeImg(-1)"  @keyup.right="changeImg(1)"
+        @mouseover="pause()" @mouseout="play()">
 
-        <div class="left-arrow-container">
-            <i class="fa fa-chevron-circle-left" @click="prev()"></i>
-        </div>
-        
-        <div class="center-block">
-            <div v-for="i in [activeImage]">
-
-                <img class="main-img" :src="currentImg()" alt="">
-
+            <!-- freccia -->
+            <div class="left-arrow-container">
+                <i class="fa fa-chevron-circle-left" @click="changeImg(-1)"></i>
             </div>
+    
+            <!-- blocco centrale -->
             
-            <!-- dots -->
-            <ul class="dots-container">
-                <li v-for="(dot, index) in characters" :class="{ active: index === activeImage }" class="dot" @click="jump(index)"></li>
-            </ul>
 
-        </div>
+             <!-- Container immagini -->
+            <div class="center-block">
+                <img :src="characters[activeImage]" class="main-img">
 
-        <div class="right-arrow-container">
-            <i class="fa fa-chevron-circle-right next" @click="next()"></i>
+                <div class="dots-container">
+                    <a href="#" class="dot" :class="{active: activeImage === index }" :data-index="index"
+                    v-for="(img, index) in characters" @click.prevent="onDotClick(index)"></a>
+                </div>
+            </div>
+
+            
+           
+    
+            <!-- freccia -->
+            <div class="right-arrow-container">
+                <i class="fa fa-chevron-circle-right next" @click="changeImg(1)"></i>
+            </div>
         </div>
 
     </div>
